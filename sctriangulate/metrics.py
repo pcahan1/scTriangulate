@@ -197,14 +197,15 @@ def marker_gene(adata, key, species, criterion, folder):
     col_enrichr = []
     col_gsea = []
     col_purify = []   # genelist that have artifact genes removed
-    logger_sctriangulate.warning('Running GSEAPY for marker genes for {}, requires Internet connection (not an error, just reminder)'.format(key))
-    for cluster in result.index:
-        enrichr_dict = run_enrichr(result.loc[cluster,:].to_list()[0],key=key,name=cluster,folder=folder,species=species,criterion=criterion)  # [0] because it is a [[gene_list]],we only need [gene_list]
-        gsea_dict = run_gsea(result.loc[cluster,:].to_list()[0],key=key,name=cluster,folder=folder,species=species,criterion=criterion)
-        purified = purify_gene(result.loc[cluster,:].to_list()[0],species,criterion) # the [0] is explained last line
-        col_enrichr.append(enrichr_dict)
-        col_gsea.append(gsea_dict)
-        col_purify.append(purified)
+    # logger_sctriangulate.warning('Running GSEAPY for marker genes for {}, requires Internet connection (not an error, just reminder)'.format(key))
+    logger_sctriangulate.warning('Skipping GSEAPY for marker genes for {}, requires Internet connection (not an error, just reminder)'.format(key))
+    # for cluster in result.index:
+    #    enrichr_dict = run_enrichr(result.loc[cluster,:].to_list()[0],key=key,name=cluster,folder=folder,species=species,criterion=criterion)  # [0] because it is a [[gene_list]],we only need [gene_list]
+    #    gsea_dict = run_gsea(result.loc[cluster,:].to_list()[0],key=key,name=cluster,folder=folder,species=species,criterion=criterion)
+    #    purified = purify_gene(result.loc[cluster,:].to_list()[0],species,criterion) # the [0] is explained last line
+    #    col_enrichr.append(enrichr_dict)
+    #    col_gsea.append(gsea_dict)
+    #    col_purify.append(purified)
 
     result['enrichr'] = col_enrichr
     result['gsea'] = col_gsea
